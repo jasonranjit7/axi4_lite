@@ -1,0 +1,58 @@
+`include "uvm_macros.svh"
+//import uvm_pkg::*;
+`include "interface.sv"
+`include "base_test.sv"
+`include "test.sv"
+
+module tb_top#(parameter ADDR_WIDTH=32, DATA_WIDTH=32)();
+  
+  logic clk;
+  logic resetn;
+  
+  initial begin
+    clk = 0;
+    forever #5 clk = ~clk;
+  end
+  
+  initial begin
+  resetn = 0; 
+  #20;
+  resetn = 1; 
+end
+  
+  intf#(ADDR_WIDTH, DATA_WIDTH) intff(clk, resetn);
+  
+  subordinate#(.ADDR_WIDTH(32), .DATA_WIDTH(32)
+              )dut(
+    .ACLK(intff.ACLK),
+    .ARESETN(intff.ARESETN),
+    .AWADDR(intff.AWADDR),
+    .AWVALID(intff.AWVALID),
+    .AWREADY(intff.AWREADY),
+    .WDATA(intff.WDATA),
+    .WSTRB(intff.WSTRB),
+    .WVALID(intff.WVALID),
+    .WREADY(intff.WREADY),
+    .BRESP(intff.BRESP),
+    .BVALID(intff.BVALID),
+    .BREADY(intff.BREADY),
+    .ARADDR(intff.ARADDR),
+    .ARVALID(intff.ARVALID),
+    .ARREADY(intff.ARREADY),
+    .RDATA(intff.RDATA),
+    .RRESP(intff.RRESP),
+    .RVALID(intff.RVALID),
+    .RREADY(intff.RREADY)
+  );
+    
+  
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0);
+    uvm_config_db#(virtual intf#(ADDR_WIDTH, DATA_WIDTH))::set(null, "*", "vif", intff);
+    run_test("base_test");
+  end
+  
+  
+  
+endmodule
