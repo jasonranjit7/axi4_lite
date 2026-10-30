@@ -46,7 +46,7 @@ end
     .RREADY(intff.RREADY)
   );
   
-  bind dut sva_module#(.ADDR_WIDTH(ADDR_WIDTH),
+  bind subordinate sva_module#(.ADDR_WIDTH(ADDR_WIDTH),
                    .DATA_WIDTH(DATA_WIDTH)
                   ) axi_lite_sva(
     .ACLK(ACLK),
