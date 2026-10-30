@@ -4,6 +4,7 @@ import uvm_pkg::*;
 `include "tests/base_test.sv"
 `include "tests/test.sv"
 `include "sva_module.sv"
+`include "covergroup.sv"
 `include "../rtl/subordinate.sv"
 module tb_top#(parameter ADDR_WIDTH=32, DATA_WIDTH=32)();
   
@@ -16,10 +17,10 @@ module tb_top#(parameter ADDR_WIDTH=32, DATA_WIDTH=32)();
   end
   
   initial begin
-  resetn = 0; 
-  #20;
-  resetn = 1; 
-end
+    resetn = 0; 
+    #20;
+    resetn = 1; 
+  end
   
   intf#(ADDR_WIDTH, DATA_WIDTH) intff(clk, resetn);
   
@@ -69,6 +70,9 @@ end
     .RVALID(RVALID),
     .RREADY(RREADY)
   );
+  
+  
+  cover_group cg(.intff(intff));
     
   
   initial begin

@@ -1,5 +1,5 @@
 # 1. Compile with -full64 to match system architecture
-vcs -full64 -sverilog -timescale=1ns/1ns -ntb_opts uvm-1.2 -cm line+cond+fsm+tgl+branch+assert design.sv testbench.sv -o simv
+vcs -full64 -sverilog -timescale=1ns/1ns -ntb_opts uvm-1.2 -cm line+cond+fsm+tgl+branch+assert ../rtl/subordinate.sv tb_top.sv -o simv
 
 # 2. Run simulation to generate the .vdb coverage directory
 ./simv -cm line+cond+fsm+tgl+branch+assert
