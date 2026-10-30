@@ -1,9 +1,9 @@
 `include "uvm_macros.svh"
-//import uvm_pkg::*;
+import uvm_pkg::*;
 `include "interface.sv"
-`include "base_test.sv"
-`include "test.sv"
-
+`include "tests/base_test.sv"
+`include "tests/test.sv"
+`include "../rtl/subordinate.sv"
 module tb_top#(parameter ADDR_WIDTH=32, DATA_WIDTH=32)();
   
   logic clk;

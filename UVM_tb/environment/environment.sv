@@ -1,5 +1,5 @@
-`include "../agent/agent.sv"
-`include "scoreboard.sv"
+`include "agent/agent.sv"
+`include "environment/scoreboard.sv"
 class environment#(parameter ADDR_WIDTH=32, DATA_WIDTH=32)  extends uvm_env;
   `uvm_component_utils(environment)
   

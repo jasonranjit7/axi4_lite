@@ -1,4 +1,7 @@
-interface intf#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) (input logic clk);
+`ifndef INTERFACE_SV
+`define INTERFACE_SV
+interface intf#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) (input logic ACLK,
+                                                            input logic ARESETN);
   
   // Write address channel
   logic [ADDR_WIDTH-1:0] AWADDR;
@@ -28,3 +31,4 @@ interface intf#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) (input logic clk);
   logic RREADY;
   
 endinterface
+`endif

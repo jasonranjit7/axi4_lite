@@ -1,4 +1,4 @@
-`include "environment.sv"
+`include "environment/environment.sv"
 `include "sequence.sv"
 class base_test #(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) extends uvm_test;
   `uvm_component_utils(base_test)

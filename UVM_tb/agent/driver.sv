@@ -73,7 +73,7 @@ class driver#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) extends uvm_driver#(se
     
     vif.BREADY <= 1;
     do @(posedge vif.ACLK); while (!vif.BVALID);
-    item.resp <= vif.BRESP;
+    item.resp = vif.BRESP;
     vif.BREADY <= 0;
     
   endtask
@@ -86,8 +86,8 @@ class driver#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) extends uvm_driver#(se
     
     vif.RREADY <= 1;
     do @(posedge vif.ACLK); while(!vif.RVALID);
-    item.data <= vif.RDATA;
-    item.resp <= vif.RRESP;
+    item.data = vif.RDATA;
+    item.resp = vif.RRESP;
     vif.RREADY <= 1'b0;
     
   endtask

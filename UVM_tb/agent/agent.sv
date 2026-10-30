@@ -1,8 +1,8 @@
 `include "tb_params_pkg.sv"
 import tb_params_pkg::*;
 `include "sequence_item.sv"
-`include "driver.sv"
-`include "monitor.sv"
+`include "agent/driver.sv"
+`include "agent/monitor.sv"
 
 
 typedef uvm_sequencer #(sequence_item#(ADDR_WIDTH, DATA_WIDTH)) sequencer;

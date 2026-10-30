@@ -1,6 +1,6 @@
-`include "../interface.sv"
-`include "../sequence_item.sv"
-
+`include "interface.sv"
+`include "sequence_item.sv"
+`include "tb_params_pkg.sv"
 class scoreboard#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) extends uvm_scoreboard;
   
   `uvm_component_param_utils(scoreboard#(ADDR_WIDTH, DATA_WIDTH))
@@ -29,13 +29,13 @@ class scoreboard#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) extends uvm_scoreb
             if (trans.strb[i])
               exp_reg_ctrl[i*8 +: 8] = trans.data[i*8 +: 8];
           end
-          check_response(trans.resp, typedefs::OKAY, "WRITE reg_ctrl BRESP");
+          check_response(trans.resp, tb_params_pkg::OKAY, "WRITE reg_ctrl BRESP");
         end
         'h1: begin // reg_status is RO
-          check_response(trans.resp, typedefs::OKAY, "WRITE reg_status BRESP");
+          check_response(trans.resp, tb_params_pkg::OKAY, "WRITE reg_status BRESP");
         end
         default: begin // Unmapped address -> DECERR
-          check_response(trans.resp, typedefs::DECERR, "WRITE DECERR");
+          check_response(trans.resp, tb_params_pkg::DECERR, "WRITE DECERR");
         end
       endcase
     end 
@@ -43,14 +43,14 @@ class scoreboard#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) extends uvm_scoreb
       case (word_addr)
         'h0: begin
           check_data(trans.data, exp_reg_ctrl, "READ reg_ctrl DATA");
-          check_response(trans.resp, typedefs::OKAY, "READ reg_ctrl RRESP");
+          check_response(trans.resp, tb_params_pkg::OKAY, "READ reg_ctrl RRESP");
         end
         'h1: begin
           check_data(trans.data, exp_reg_status, "READ reg_status DATA");
-          check_response(trans.resp, typedefs::OKAY, "READ reg_status RRESP");
+          check_response(trans.resp, tb_params_pkg::OKAY, "READ reg_status RRESP");
         end
         default: begin
-          check_response(trans.resp, typedefs::DECERR, "READ DECERR");
+          check_response(trans.resp, tb_params_pkg::DECERR, "READ DECERR");
         end
       endcase
     end

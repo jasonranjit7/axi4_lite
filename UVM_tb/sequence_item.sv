@@ -1,16 +1,20 @@
+`ifndef SEQUENCE_ITEM_SV
+`define SEQUENCE_ITEM_SV
+
 class sequence_item#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) extends uvm_sequence_item;
   
   `uvm_object_utils(sequence_item);
   
-  typedef enum logic trans {WRITE, READ} trans;
+  typedef enum logic {WRITE, READ} trans;
   
   
-  rand logic trans kind;
+  rand trans kind;
   rand logic [ADDR_WIDTH-1:0] addr;
   rand logic addrvalid;
   rand logic [DATA_WIDTH-1:0] data;
   rand logic [DATA_WIDTH/8-1:0] strb;
   rand logic dvalid;
+  rand logic resp;
   
   rand int unsigned aw_delay, w_delay;
   
@@ -25,3 +29,4 @@ class sequence_item#(parameter ADDR_WIDTH = 32, DATA_WIDTH = 32) extends uvm_seq
   endfunction
   
 endclass
+`endif
